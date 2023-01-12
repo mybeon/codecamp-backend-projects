@@ -1,0 +1,17 @@
+{
+  "name": "codecamp-timestamp",
+  "version": "1.0.0",
+  "description": "timestamp microserivce that converts unix date to human readable date and vice versa.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "hicham elb",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
