@@ -5,6 +5,10 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+app.get("/api/whoami", (req, res) => {
+  res.json({ ipaddress: req.ip, language: req.headers["accept-language"], software: req.headers["user-agent"] });
+});
+
 app.get("/api/:date", (req, res) => {
   let input = req.params.date;
   if (/^[0-9]*$/.test(input)) {
