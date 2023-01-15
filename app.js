@@ -1,22 +1,17 @@
 const express = require("express");
+const apiRouter = require("./router");
 const app = express();
+const bodyParser = require("body-parser");
 
-app.get("/", (req, res) => {
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", (_req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/api/whoami", (req, res) => {
-  res.json({ ipaddress: req.ip, language: req.headers["accept-language"], software: req.headers["user-agent"] });
+app.use("/api", apiRouter);
+app.use((_req, res) => {
+  res.send('<h1 style="text-align: center;text-transform: capitalize; margin-top: 2rem">404 ! page not found</h1>');
 });
 
-app.get("/api/:date", (req, res) => {
-  let input = req.params.date;
-  if (/^[0-9]*$/.test(input)) {
-    input = +input;
-  }
-  const date = new Date(input).toString();
-  const unix = Date.parse(date);
-  res.json({ unix, utc: date });
-});
-
-app.listen(3000, console.log("server started..."));
+module.exports = app;
